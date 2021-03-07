@@ -1,25 +1,30 @@
 using System.Threading.Tasks;
 using Grpc.Core;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using Proto.Library;
+using Service.Commands;
 
 namespace Service
 {
     public class GreeterService : Greeter.GreeterBase
     {
         private readonly ILogger<GreeterService> _logger;
+        private readonly IMediator _mediator;
 
-        public GreeterService(ILogger<GreeterService> logger)
+        public GreeterService(ILogger<GreeterService> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
-        public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
+        public override async Task<HelloResponse> SayHello(HelloRequest request, ServerCallContext context)
         {
-            return Task.FromResult(new HelloReply
+            return new HelloResponse
             {
-                Message = "Hello " + request.Name
-            });
+                Message = await _mediator.Send(new SayHelloCommand(request))
+            };
         }
     }
 }
+

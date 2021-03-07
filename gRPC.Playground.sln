@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{BDEB958C-643A-4B41-9676-C4EA5850A510}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{BDEB958C-643A-4B41-9676-C4EA5850A510}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{FF80E271-0CE4-44F1-B127-CE718BBA7D39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{FF80E271-0CE4-44F1-B127-CE718BBA7D39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proto.Library", "Proto.Library\Proto.Library.csproj", "{BC0DE6BB-83D3-4950-8E73-EEF79D718907}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proto.Library", "Proto.Library\Proto.Library.csproj", "{BC0DE6BB-83D3-4950-8E73-EEF79D718907}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

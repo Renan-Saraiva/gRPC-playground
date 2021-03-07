@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Proto.Library;
 using Service.Commands;
 
 namespace Service

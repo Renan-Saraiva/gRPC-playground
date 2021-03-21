@@ -1,4 +1,4 @@
-﻿namespace Service.Dtos
+﻿namespace Rest.Dtos
 {
     public class HelloRequestDto
     {

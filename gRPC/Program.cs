@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
-namespace Service
+namespace gRPC
 {
     public class Program
     {
@@ -15,13 +15,9 @@ namespace Service
         // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.ConfigureKestrel(options =>
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    options.ListenAnyIP(5000, listenOptions =>
-                        listenOptions.Protocols = HttpProtocols.Http2);
-
-                    options.ListenAnyIP(4999, listenOptions =>
-                        listenOptions.Protocols = HttpProtocols.Http1);
-                }).UseStartup<Startup>());
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
+using System.Threading.Tasks;
 
 namespace Client.Benchmark
 {
@@ -12,7 +12,7 @@ namespace Client.Benchmark
     [RPlotExporter]
     public class CallsBenchmark
     {
-        [Params(100)]
+        [Params(100, 200)]
         public int IterationCount;
 
         readonly RestBenchmark restBenchmark = new RestBenchmark();
@@ -64,6 +64,22 @@ namespace Client.Benchmark
         {
             for (int i = 0; i < IterationCount; i++)
                 await gRPCBenchmark.ExecuteMultipleFields();
+        }
+
+        [Benchmark()]
+        [BenchmarkCategory("multipleFieldsList")]
+        public async Task RestMultipleList()
+        {
+            for (int i = 0; i < IterationCount; i++)
+                await restBenchmark.ExecuteMultipleFieldsList();
+        }
+
+        [Benchmark]
+        [BenchmarkCategory("multipleFieldsList")]
+        public async Task gRPCMultipleList()
+        {
+            for (int i = 0; i < IterationCount; i++)
+                await gRPCBenchmark.ExecuteMultipleFieldsList();
         }
     }
 }

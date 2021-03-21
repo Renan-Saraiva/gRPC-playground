@@ -1,6 +1,8 @@
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using Proto.Library;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace gRPC
@@ -32,8 +34,22 @@ namespace gRPC
 
         public override Task<MultipleFieldsResponse> MultipleFields(MultipleFieldsRequest request, ServerCallContext context)
         {
-            return Task.FromResult(new MultipleFieldsResponse
-            {
+            return Task.FromResult(CreateMultipleFieldsResponse());
+        }
+
+        public override Task<MultipleFieldsResponseList> MultipleFieldsList(MultipleFieldsRequestList request, ServerCallContext context)
+        {
+            var response = new MultipleFieldsResponseList();
+            response.List.AddRange(CreateMultipleFieldsResponseList());
+            return Task.FromResult(response);
+
+        }
+
+        private IEnumerable<MultipleFieldsResponse> CreateMultipleFieldsResponseList()
+            => Enumerable.Repeat(CreateMultipleFieldsResponse(), Constraints.ListCount);
+
+        private MultipleFieldsResponse CreateMultipleFieldsResponse()
+            => new MultipleFieldsResponse {
                 Prop1 = "teste---",
                 Prop2 = 780784,
                 Prop3 = "teste---",
@@ -44,8 +60,7 @@ namespace gRPC
                 Prop8 = 878048040,
                 Prop9 = "teste---",
                 Prop10 = "teste---"
-            });
-        }
+            };
     }
 }
 

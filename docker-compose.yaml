@@ -1,0 +1,27 @@
+  version: '3'
+  networks: 
+    net:
+  services:
+    grpc-api:
+      image: grpc-api
+      container_name: grpc-api
+      build: 
+        context: ./grpc
+        dockerfile: Dockerfile
+      ports:
+        - "5001:5001"
+        - "5000:5000"
+      networks: 
+        - net
+    rest-api:
+      image: rest-api
+      container_name: rest-api
+      build: 
+        context: ./rest
+        dockerfile: Dockerfile
+      ports:
+        - "6001:5001"
+        - "6000:5000"
+      networks: 
+        - net
+        

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proto.Library", "Proto.Library\Proto.Library.csproj", "{BC0DE6BB-83D3-4950-8E73-EEF79D718907}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rest", "Rest\Rest.csproj", "{36514FC1-DF6A-4E23-8E64-22D916058076}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rest", "Rest\Rest.csproj", "{36514FC1-DF6A-4E23-8E64-22D916058076}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

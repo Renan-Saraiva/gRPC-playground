@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Rest.Dtos;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Rest.Controllers
 {
@@ -33,7 +35,20 @@ namespace Rest.Controllers
         [HttpPost("multiple-fields")]
         public IActionResult MultipleFields(MultipleFieldsRequest request)
         {
-            return Ok(new MultipleFieldsResponse
+            return Ok(CreateMultipleFieldsResponse());
+        }
+
+        [HttpPost("multiple-fields-list")]
+        public IActionResult MultipleFieldsList(IList<MultipleFieldsRequest> request)
+        {
+            return Ok(CreateMultipleFieldsResponseList());
+        }
+
+        private IEnumerable<MultipleFieldsResponse> CreateMultipleFieldsResponseList()
+            => Enumerable.Repeat(CreateMultipleFieldsResponse(), Proto.Library.Constraints.ListCount);
+
+        private MultipleFieldsResponse CreateMultipleFieldsResponse()
+            => new MultipleFieldsResponse
             {
                 Prop1 = "teste---",
                 Prop2 = 780784,
@@ -45,8 +60,6 @@ namespace Rest.Controllers
                 Prop8 = 878048040,
                 Prop9 = "teste---",
                 Prop10 = "teste---"
-            });
-        }
-
+            };
     }
 }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Proto.Library;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
@@ -37,7 +39,22 @@ namespace Client.Benchmark
 
         public async Task<MultipleFields> ExecuteMultipleFields()
         {
-            var response = await _httpClient.PostAsJsonAsync("greeter/multiple-fields", new MultipleFields
+            var response = await _httpClient.PostAsJsonAsync("greeter/multiple-fields", CreateMultipleFields());
+            return await response.Content.ReadFromJsonAsync<MultipleFields>();
+        }
+
+        public async Task<IList<MultipleFields>> ExecuteMultipleFieldsList()
+        {
+            var response = await _httpClient.PostAsJsonAsync("greeter/multiple-fields-list", CreateMultipleFieldsList());
+
+            return await response.Content.ReadFromJsonAsync<List<MultipleFields>>();
+        }
+
+        private IEnumerable<MultipleFields> CreateMultipleFieldsList()
+            => Enumerable.Repeat<MultipleFields>(CreateMultipleFields(), Constraints.ListCount);
+
+        private MultipleFields CreateMultipleFields()
+            => new MultipleFields
             {
                 Prop1 = "teste---",
                 Prop2 = 780784,
@@ -49,10 +66,7 @@ namespace Client.Benchmark
                 Prop8 = 878048040,
                 Prop9 = "teste---",
                 Prop10 = "teste---"
-            });
-
-            return await response.Content.ReadFromJsonAsync<MultipleFields>();
-        }
+            };
 
         ~RestBenchmark()
         {

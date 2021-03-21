@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
-using Grpc.Net.Client;
+﻿using Grpc.Net.Client;
 using Proto.Library;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Client.Benchmark
 {
@@ -27,7 +29,21 @@ namespace Client.Benchmark
 
         public async Task<MultipleFieldsResponse> ExecuteMultipleFields()
         {
-            return await _client.MultipleFieldsAsync(new MultipleFieldsRequest
+            return await _client.MultipleFieldsAsync(CreateMultipleFieldsRequest());
+        }
+
+        public async Task<MultipleFieldsResponseList> ExecuteMultipleFieldsList()
+        {
+            var request = new MultipleFieldsRequestList();
+            request.List.AddRange(CreateMultipleFieldsResponseList());
+            return await _client.MultipleFieldsListAsync(request);
+        }
+
+        private IEnumerable<MultipleFieldsRequest> CreateMultipleFieldsResponseList()
+            => Enumerable.Repeat(CreateMultipleFieldsRequest(), Constraints.ListCount);
+
+        private MultipleFieldsRequest CreateMultipleFieldsRequest()
+            => new MultipleFieldsRequest
             {
                 Prop1 = "teste---",
                 Prop2 = 780784,
@@ -39,8 +55,7 @@ namespace Client.Benchmark
                 Prop8 = 878048040,
                 Prop9 = "teste---",
                 Prop10 = "teste---"
-            });
-        }
+            };
 
         ~gRPCBenchmark()
         {

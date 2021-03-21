@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Grpc.Core;
+﻿using Grpc.Core;
 using Grpc.Core.Interceptors;
+using System;
+using System.Threading.Tasks;
 
 namespace Client
 {

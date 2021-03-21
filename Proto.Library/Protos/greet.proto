@@ -10,6 +10,7 @@ service Greeter {
   rpc SayHello (HelloRequest) returns (HelloResponse);
   rpc LargeSayHelloResponse (HelloRequest) returns (HelloResponse);
   rpc MultipleFields (MultipleFieldsRequest) returns (MultipleFieldsResponse);
+  rpc MultipleFieldsList (MultipleFieldsRequestList) returns (MultipleFieldsResponseList);
 }
 
 // The request message containing the user's name.
@@ -48,3 +49,11 @@ message MultipleFieldsResponse {
   string prop10 = 10;
 }
 
+message MultipleFieldsResponseList {
+	repeated MultipleFieldsResponse List = 1;
+}
+
+
+message MultipleFieldsRequestList {
+	repeated MultipleFieldsRequest List = 1;
+}
